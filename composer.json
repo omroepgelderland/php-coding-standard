@@ -1,0 +1,24 @@
+{
+    "name": "omroepgelderland/php-coding-standard",
+    "description": "PHP coding standard used by Omroep Gelderland.",
+    "type": "phpcodesniffer-standard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Remy Glaser",
+            "email": "rglaser@gld.nl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4",
+        "squizlabs/php_codesniffer": "^4.0",
+        "slevomat/coding-standard": "^8.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

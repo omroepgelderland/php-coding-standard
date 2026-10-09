@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -euo pipefail
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+if [[ $(git rev-parse --abbrev-ref HEAD) != "master" ]]; then
+    echo "Op branch $current_branch ipv master. Toch doorgaan? (j/n)"
+    read -r ans
+    if [[ $ans != "j" ]]; then
+        exit 1
+    fi
+fi
+
+if [ -n "$(git status --untracked-files=no --porcelain)" ]; then
+    git status
+    echo "Er zijn uncommitted changes. Toch doorgaan? (j/n)"
+    read -r ans
+    if [[ $ans != "j" ]]; then
+        exit 1
+    fi
+fi
+
+# versieverhoging
+oude_versie="$(git tag --list --sort=v:refname | grep -P '^\d+\.\d+\.\d+' | tail -n1 || :)"
+if [[ -z $oude_versie ]]; then
+    nieuwe_versie="0.1.0"
+else
+    echo "De huidige versie is $oude_versie. Versieverhoging? (major|minor|patch|premajor|preminor|prepatch|prerelease) "
+    read -r versie_type
+    nieuwe_versie="$(semver -i "$versie_type" "$oude_versie")"
+fi
+
+git tag "$nieuwe_versie"
+git push origin
+git push origin "$nieuwe_versie"

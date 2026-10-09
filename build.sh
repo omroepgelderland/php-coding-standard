@@ -11,6 +11,8 @@ if [[ $(git rev-parse --abbrev-ref HEAD) != "master" ]]; then
     fi
 fi
 
+composer8.5 install
+
 if [ -n "$(git status --untracked-files=no --porcelain)" ]; then
     git status
     echo "Er zijn uncommitted changes. Toch doorgaan? (j/n)"

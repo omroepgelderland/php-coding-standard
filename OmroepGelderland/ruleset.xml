@@ -40,13 +40,19 @@
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
             <property name="forbiddenFunctions" type="array">
+                <element key="call_user_func_array" value="null" />
+                <element key="call_user_func" value="null" />
                 <element key="chop" value="rtrim" />
                 <element key="close" value="closedir" />
                 <element key="compact" value="null" />
                 <element key="delete" value="unset" />
+                <element key="diskfreespace" value="disk_free_space" />
+                <element key="dns_check_record" value="checkdnsrr" />
+                <element key="dns_get_mx" value="getmxrr" />
                 <element key="doubleval" value="floatval" />
                 <element key="extract" value="null" />
                 <element key="fputs" value="fwrite" />
+                <element key="gzputs" value="gzwrite" />
                 <element key="ini_alter" value="ini_set" />
                 <element key="is_double" value="is_float" />
                 <element key="is_integer" value="is_int" />
@@ -56,7 +62,14 @@
                 <element key="is_writeable" value="is_writable" />
                 <element key="join" value="implode" />
                 <element key="key_exists" value="array_key_exists" />
+                <element key="ldap_close" value="ldap_unbind" />
+                <element key="ldap_modify" value="ldap_mod_replace" />
+                <element key="mysqli_escape_string" value="mysqli_real_escape_string" />
+                <element key="mysqli_execute" value="mysqli_stmt_execute" />
+                <element key="mysqli_set_opt" value="mysqli_options" />
+                <element key="pcntl_errno" value="pcntl_get_last_error" />
                 <element key="pos" value="current" />
+                <element key="posix_errno" value="posix_get_last_error" />
                 <element key="settype" value="null" />
                 <element key="show_source" value="highlight_file" />
                 <element key="sizeof" value="count" />
@@ -142,8 +155,8 @@
                 <!-- Static-analysis type aliases -->
                 <element
                     value="
-                    @phpstan-type,
                     @phpstan-import-type,
+                    @phpstan-type,
                 " />
                 <!-- Generic type declarations -->
                 <element
